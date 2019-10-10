@@ -1,4 +1,10 @@
-import { createStore } from 'redux';
-import { Reducers } from '../reducers';
+import { createStore, applyMiddleware } from 'redux';
+import axiosMiddleware from 'redux-axios-middleware';
+import axios from 'axios';
+import rootReducer from '../rootReducer';
 
-export const Store = createStore(Reducers);
+const configureStore = () => {
+  return createStore(rootReducer, applyMiddleware(axiosMiddleware(axios)));
+};
+
+const store = configureStore();
